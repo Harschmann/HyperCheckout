@@ -1,6 +1,6 @@
 module github.com/Harschmann/hyper-checkout
 
-go 1.25.1
+go 1.23.0
 
 require (
 	github.com/go-chi/chi v1.5.5

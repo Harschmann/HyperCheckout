@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # The Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: hyper_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hypercheckout
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  # The Rate Limiter
+  redis:
+    image: redis:7-alpine
+    container_name: hyper_redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+volumes:
+  postgres_data:

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/Harschmann/hyper-checkout/internal/repository"
@@ -30,21 +31,22 @@ func (h *Handler) HandlePurchase(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// 2. Call the Repository
-	// We pass r.Context() so if the user disconnects, the DB query stops.
 	err := h.Repo.PurchaseProduct(r.Context(), req.UserID, req.ProductID, req.Quantity)
 
-	// 3. Handle Errors
 	if err != nil {
 		if err == repository.ErrOutofStock {
-			http.Error(w, "Product is out of stock", http.StatusConflict) // 409 Conflict
+			http.Error(w, "Product is out of stock", http.StatusConflict)
 		} else {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError) // 500 Error
+			// ---------------------------------------------------------
+			// NEW: Print the actual error to the terminal!
+			// ---------------------------------------------------------
+			log.Printf("❌ Transaction Failed: %v", err)
+
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		}
 		return
 	}
 
-	// 4. Success Response
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"message": "Order placed successfully"}`))
 }

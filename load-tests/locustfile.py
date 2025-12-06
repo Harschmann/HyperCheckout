@@ -4,7 +4,7 @@ from locust import HttpUser, task, between
 
 class WebsiteUser(HttpUser):
     # Simulating a very aggressive bot (fast spamming)
-    wait_time = between(0.1, 0.2)
+    wait_time = between(1, 3)
 
     @task
     def purchase_item(self):

@@ -1,7 +1,14 @@
-# .gitignore
-bin/
-tmp/
+# Secrets
 .env
+
+# Go Binaries and Vendor
+/bin
+/vendor
+main
+*.exe
+
+# OS Junk
 .DS_Store
-.idea/
-vendor/
+
+# Docker
+postgres_data/

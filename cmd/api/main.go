@@ -10,7 +10,6 @@ import (
 	"github.com/Harschmann/hyper-checkout/internal/repository"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
-	myMiddleware "github.com/Harschmann/hyper-checkout/internal/middleware"
 )
 
 func main() {
@@ -34,7 +33,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)    // Log every request
 	r.Use(middleware.Recoverer) // Recover from panics
-	r.Use(myMiddleware.RateLimit(rdb))  // Block spammers before they hit the DB
+	// r.Use(myMiddleware.RateLimit(rdb))  // Block spammers before they hit the DB
 
 	// 5. Define Routes
 	r.Post("/purchase", handler.HandlePurchase)

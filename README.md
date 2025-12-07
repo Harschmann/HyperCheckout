@@ -119,4 +119,4 @@ docker-compose logs -f app
 
 ---
 
-<p align="center"> Made with ❤️ by <a href="https://www.google.com/search?q=https://github.com/Harschmann">Harschmann</a> </p>
+<p align="center"> Made with ❤️ by <a href="https://github.com/Harschmann">Harschmann</a> </p>
